@@ -5,9 +5,6 @@ from django.contrib import messages
 from decimal import Decimal
 
 
-
-# Create your views here.
-
 from .models import MainMenu
 from .forms import BookForm
 
@@ -54,7 +51,6 @@ def postbook(request):
                       'submitted': submitted
                   })
 
-
 def displaybooks(request):
     books = Book.objects.all()
     for b in books:
@@ -88,7 +84,6 @@ def book_delete(request, book_id):
                       'item_list': MainMenu.objects.all(),
                   })
 
-
 class Register(CreateView):
     template_name = 'registration/register.html'
     form_class = UserCreationForm
@@ -110,12 +105,8 @@ def mybooks(request):
                       'books': books
                   })
 
-
 def add_to_cart(request, book_id):
-    """
-    POST /cart/add/<book_id>/ – store the book ID in the session cart list.
-    """
-    if request.method != "POST":               # protect against accidental GET
+    if request.method != "POST":              
         return redirect("displaybooks")
 
     book = get_object_or_404(Book, pk=book_id)
@@ -129,8 +120,6 @@ def add_to_cart(request, book_id):
         messages.info(request, f"“{book.name}” is already in your cart.")
 
     return redirect("displaybooks")
-
-
 
 def my_cart(request):
     cart_ids = request.session.get("cart", [])
