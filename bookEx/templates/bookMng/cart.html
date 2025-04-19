@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+  {% for item in item_list %}
+    <li><a href="{{ item.link }}">{{ item.item }}</a></li>
+  {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1>My Shopping Cart</h1>
+
+{% if books %}
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>Book</th>
+      <th>Price</th>
+      <th>Remove</th>
+    </tr>
+
+    {% for book in books %}
+    <tr>
+      <td>{{ book.name }}</td>
+      <td>${{ book.price }}</td>
+      <td>
+        <form action="{% url 'remove_from_cart' book.id %}" method="post" style="margin:0">
+          {% csrf_token %}
+          <button type="submit">✕</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td style="text-align:right"><strong>Subtotal:</strong></td>
+      <td colspan="2"><strong>${{ subtotal }}</strong></td>
+    </tr>
+  </table>
+
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock content %}
