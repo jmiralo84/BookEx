@@ -22,7 +22,7 @@ def index(request):
     return render(request,
                   'bookMng/index.html',
                   {
-                      'item_list': MainMenu.objects.all()
+                      # 'item_list': MainMenu.objects.all()
                   })
 
 
@@ -47,7 +47,7 @@ def postbook(request):
                   'bookMng/postbook.html',
                   {
                       'form': form,
-                      'item_list': MainMenu.objects.all(),
+                      # 'item_list': MainMenu.objects.all(),
                       'submitted': submitted
                   })
 
@@ -58,7 +58,7 @@ def displaybooks(request):
     return render(request,
                   'bookMng/displaybooks.html',
                   {
-                      'item_list': MainMenu.objects.all(),
+                      # 'item_list': MainMenu.objects.all(),
                       'books': books
                   })
 
@@ -70,7 +70,7 @@ def book_detail(request, book_id):
     return render(request,
                   'bookMng/book_detail.html',
                   {
-                      'item_list': MainMenu.objects.all(),
+                      # 'item_list': MainMenu.objects.all(),
                       'book': book
                   })
 
@@ -81,7 +81,7 @@ def book_delete(request, book_id):
     return render(request,
                   'bookMng/book_delete.html',
                   {
-                      'item_list': MainMenu.objects.all(),
+                      # 'item_list': MainMenu.objects.all(),
                   })
 
 class Register(CreateView):
@@ -101,7 +101,7 @@ def mybooks(request):
     return render(request,
                   'bookMng/mybooks.html',
                   {
-                      'item_list': MainMenu.objects.all(),
+                      # 'item_list': MainMenu.objects.all(),
                       'books': books
                   })
 
@@ -131,7 +131,7 @@ def my_cart(request):
     return render(request,
                   "bookMng/mybooks.html",
                   {
-                      "item_list": MainMenu.objects.all(),
+                      # "item_list": MainMenu.objects.all(),
                       "books": books,
                   })
 
@@ -145,7 +145,7 @@ def cart_page(request):
         request,
         "bookMng/cart.html",
         {
-            "item_list": MainMenu.objects.all(),
+            # "item_list": MainMenu.objects.all(),
             "books": books,
             "subtotal": subtotal,
         },
