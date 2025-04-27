@@ -31,6 +31,15 @@ header {
     min-height: 80vh;
 
 }
+/* Styling for the logo within the sidebar */
+.sidebar-logo {
+
+}
+
+.sidebar-logo img {
+    max-width: 105%;
+
+}
 
 /* Sidebar (Main Menu) */
 .sidebar {
@@ -94,7 +103,6 @@ footer {
     margin-top: 20px;
     /* Added margin equal to sidebar width */
     margin-left: 200px;
-}
 }
 
 footer p {
