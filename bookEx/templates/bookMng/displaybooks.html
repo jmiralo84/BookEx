@@ -26,7 +26,7 @@
    {% for book in books %}
        <tr>
          <td>
-        <a href="{{ book.name }}">  {{ book.name }} </a>
+        <a href="{% url 'book_detail' book.id %}">  {{ book.name }} </a>
          </td>
          <td>
             {{ book.price }}
