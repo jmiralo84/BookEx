@@ -1,13 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block sidenav %}
-   {% for item in item_list %}
-      <li>
-        <a href="{{ item.link }}">  {{ item.item }} </a>
-      </li>
-   {% endfor %}
-{% endblock sidenav %}
+<!-- Remove every page dealing with the sidenav independently -->
 
 {% block content %}
    <h1>Welcome to Book Exchange System</h1>

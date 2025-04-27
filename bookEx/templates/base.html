@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Layout with Banner, Menu, and Content</title>
     <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css">
+    <script src="https://kit.fontawesome.com/16d024a0be.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -34,10 +35,13 @@
         <nav class="sidebar">
             <ul>
                 {% block sidenav %}
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
+
+                <!-- this is brought over from the other.htmls -->
+                   {% for item in item_list %}
+                      <li>
+                        <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
+                      </li>
+                   {% endfor %}
                 {% endblock sidenav %}
             </ul>
         </nav>
