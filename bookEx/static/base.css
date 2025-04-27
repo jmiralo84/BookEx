@@ -8,18 +8,18 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #dbd8e3;
     color: #333;
 }
 
 /* Header (Banner) */
 header {
-    background: #333;
+
+    background: #352f44;
     color: white;
     padding: 20px 0;
-    text-align: center;
+    text-align: right;
     margin-left: 200px;
-    width: 100%;
 }
 
 .banner h1 {
@@ -79,6 +79,7 @@ header {
 /* Main Content */
 .content {
     margin-left: 300px; /* Add new margin equal to sidebar width */
+
 }
 
 .content section {
@@ -96,11 +97,12 @@ header {
 
 /* Footer */
 footer {
-    background: #333;
+    background: #352f44;
     color: white;
     text-align: center;
     padding: 10px 0;
     margin-top: 20px;
+    top: 0;
     /* Added margin equal to sidebar width */
     margin-left: 200px;
 }

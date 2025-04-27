@@ -7,16 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Layout with Banner, Menu, and Content</title>
+    <!-- Bootstrap 3 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css">
     <script src="https://kit.fontawesome.com/16d024a0be.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
 
-        <span style="float: right;">
+        <span class="login-section">
             {% if user.is_authenticated %}
                {{ user.username}}
-               <form action="{% url 'logout' %}?next=/" method="post">
+               <form action="{% url 'logout' %}?next=/" method="post" style="display: inline;">
                    <button type="submit">logout</button>
                    {% csrf_token %}
                </form>
@@ -25,11 +27,9 @@
                <a href="{% url 'login' %}?next=/">login</a>
             {% endif %}
         </span>
-
-        <div class="banner">
-            <img src="{% static 'banner.jpg' %}" height="120"/>
-        </div>
+</nav>
     </header>
+
 
     <div class="container">
         <nav class="sidebar">
@@ -63,5 +63,11 @@
     <footer>
         <p>&copy; 2025 My Web Layout</p>
     </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins in v3/4) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap 3 JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
