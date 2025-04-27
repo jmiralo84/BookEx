@@ -18,6 +18,8 @@ header {
     color: white;
     padding: 20px 0;
     text-align: center;
+    margin-left: 200px;
+    width: 100%;
 }
 
 .banner h1 {
@@ -26,9 +28,8 @@ header {
 
 /* Container for Sidebar and Content */
 .container {
-    display: flex;
     min-height: 80vh;
-    padding: 20px;
+
 }
 
 /* Sidebar (Main Menu) */
@@ -37,7 +38,14 @@ header {
     background-color: #333;
     color: white;
     padding: 20px;
-    flex-shrink: 0;
+
+    /* --- New Styles --- */
+    position: fixed;
+    left: 0;       /* Position it at the left edge */
+    top: 0;
+    height: 100vh;
+    /* --- Optional: Add scroll for long menus --- */
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
 }
 
 .sidebar ul {
@@ -61,8 +69,7 @@ header {
 
 /* Main Content */
 .content {
-    flex-grow: 1;
-    margin-left: 20px;
+    margin-left: 300px; /* Add new margin equal to sidebar width */
 }
 
 .content section {
@@ -85,6 +92,9 @@ footer {
     text-align: center;
     padding: 10px 0;
     margin-top: 20px;
+    /* Added margin equal to sidebar width */
+    margin-left: 200px;
+}
 }
 
 footer p {
