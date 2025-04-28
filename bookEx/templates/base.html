@@ -43,11 +43,11 @@
     <div class="container">
         <nav class="sidebar">
 
-            <!-- ADD LOGO HERE -->
+            <!-- LOGO -->
             <div class="sidebar-logo">
                 <img src="{% static 'logo.png' %}" alt="Our Logo"/>
             </div>
-            <!-- END LOGO -->
+
 
             <ul>
                 {% block sidenav %}
@@ -61,19 +61,21 @@
                 {% endblock sidenav %}
             </ul>
 
-                <!-- PASTE THE BLOCK HERE and modify span -->
-            <span class="sidebar-user-info"> {# Add class, remove style attribute #}
+
+            <div class="sidebar-user-info"> {# Add class, remove style attribute #}
                 {% if user.is_authenticated %}
-                   {{ user.username}}
+
+                Hello {{ user|lower|capfirst }}!
                    <form action="{% url 'logout' %}?next=/" method="post">
-                       <button type="submit">logout</button>
+
+                       <button type="submit" class="btn btn-primary">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
                        {% csrf_token %}
                    </form>
                 {% else %}
                    Not Logged in
                    <a href="{% url 'login' %}?next=/">login</a>
                 {% endif %}
-            </span>
+            </div>
             <!-- END OF PASTED BLOCK -->
 
         </nav>

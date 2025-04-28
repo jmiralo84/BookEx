@@ -97,6 +97,9 @@ header {
     height: 100vh;
     /* --- Optional: Add scroll for long menus --- */
     overflow-y: auto; /* Add scrollbar if content exceeds height */
+
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar ul {
@@ -109,14 +112,45 @@ header {
 }
 
 .sidebar ul li a {
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    /* Text Color / Background Color */
     color: white;
+    background-color: #424040;
     text-decoration: none;
-    font-size: 18px;
+
+    border-radius: 8px;
+    transition: background-color 0.7s ease;
+
+}
+
+.sidebar ul li a ~ .active {
+    background-color: #007bff; /* Example active background color */
+    font-weight: bold;
 }
 
 .sidebar ul li a:hover {
     text-decoration: underline;
+    background-color: #2ef6a8;
+    color: #413f3f;
+    display: block;
 }
+
+.sidebar-user-info {
+    margin-top: auto;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    /* Text Color / Background Color */
+    color: white;
+    background-color: #424040;
+    text-decoration: none;
+
+    border-radius: 8px;
+    transition: background-color 0.7s ease;
+}
+
 
 /* Main Content */
 .content {
@@ -143,10 +177,11 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
-    margin-top: 20px;
+    margin-top: 115px;
     top: 0;
     /* Added margin equal to sidebar width */
     margin-left: 200px;
+
 }
 
 footer p {
