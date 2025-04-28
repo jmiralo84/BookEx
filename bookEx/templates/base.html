@@ -14,20 +14,29 @@
 </head>
 <body>
     <header>
-
-        <span class="login-section">
-            {% if user.is_authenticated %}
-               {{ user.username}}
-               <form action="{% url 'logout' %}?next=/" method="post" style="display: inline;">
-                   <button type="submit">logout</button>
-                   {% csrf_token %}
-               </form>
-            {% else %}
-               Not Logged in
-               <a href="{% url 'login' %}?next=/">login</a>
-            {% endif %}
-        </span>
-</nav>
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            {% block breadcrumbs %}
+                {# Check if breadcrumb data exists in the context #}
+                {% if breadcrumb_list %}
+                    <ol class="breadcrumb-list">
+                        {% for crumb in breadcrumb_list %}
+                            <li class="breadcrumb-item">
+                                {# If it has a URL, make it a link #}
+                                {% if crumb.url %}
+                                    <a href="{{ crumb.url }}">{{ crumb.name }}</a>
+                                {% else %}
+                                    {# Otherwise (usually the last item), just display text #}
+                                    {{ crumb.name }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    {# Optional: Default content if no breadcrumbs provided #}
+                      {# An empty space to maintain header height #}
+                {% endif %}
+            {% endblock breadcrumbs %}
+        </nav>
     </header>
 
 
@@ -51,6 +60,22 @@
                    {% endfor %}
                 {% endblock sidenav %}
             </ul>
+
+                <!-- PASTE THE BLOCK HERE and modify span -->
+            <span class="sidebar-user-info"> {# Add class, remove style attribute #}
+                {% if user.is_authenticated %}
+                   {{ user.username}}
+                   <form action="{% url 'logout' %}?next=/" method="post">
+                       <button type="submit">logout</button>
+                       {% csrf_token %}
+                   </form>
+                {% else %}
+                   Not Logged in
+                   <a href="{% url 'login' %}?next=/">login</a>
+                {% endif %}
+            </span>
+            <!-- END OF PASTED BLOCK -->
+
         </nav>
 
         <main class="content">

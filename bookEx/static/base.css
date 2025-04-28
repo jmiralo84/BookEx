@@ -12,12 +12,51 @@ body {
     color: #333;
 }
 
-/* Header (Banner) */
-header {
+/* --- Breadcrumb Styling --- */
+.breadcrumb-nav {
+    padding: 10px 20px; /* Add some padding inside the breadcrumb area */
+    /* Optional background for the breadcrumb bar itself */
+    /* background-color: #444; */
+}
 
+.breadcrumb-list {
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em; /* Slightly smaller text */
+    text-align: left;
+}
+
+.breadcrumb-item {
+    display: inline; /* Display items horizontally */
+}
+
+/* Add a separator between items */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "->"; /* Use '>' as a separator */
+    padding: 0 8px; /* Add space around the separator */
+    color: #ccc;   /* Separator color */
+}
+
+.breadcrumb-item a {
+    color: #6ea9f0; /* Link color */
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+    color: gold;
+}
+
+/* Style for the current page (the one without a link) */
+.breadcrumb-item:last-child {
+    color: #fff; /* Make current page stand out slightly */
+    font-weight: bold;
+}
+
+header {
     background: #352f44;
-    color: white;
-    padding: 20px 0;
+    /* color: white; */
+    /* padding: 20px 0; */
     text-align: right;
     margin-left: 200px;
 }
@@ -26,6 +65,7 @@ header {
     margin: 0;
 }
 
+
 /* Container for Sidebar and Content */
 .container {
     min-height: 80vh;
@@ -33,6 +73,7 @@ header {
 }
 /* Styling for the logo within the sidebar */
 .sidebar-logo {
+
 
 }
 
@@ -43,6 +84,7 @@ header {
 
 /* Sidebar (Main Menu) */
 .sidebar {
+
     width: 200px;
     background-color: #333;
     color: white;
