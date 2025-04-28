@@ -8,36 +8,98 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #dbd8e3;
     color: #333;
 }
 
-/* Header (Banner) */
+/* --- Breadcrumb Styling --- */
+.breadcrumb-nav {
+    padding: 10px 20px; /* Add some padding inside the breadcrumb area */
+    /* Optional background for the breadcrumb bar itself */
+    /* background-color: #444; */
+}
+
+.breadcrumb-list {
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em; /* Slightly smaller text */
+    text-align: left;
+}
+
+.breadcrumb-item {
+    display: inline; /* Display items horizontally */
+}
+
+/* Add a separator between items */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "->"; /* Use '>' as a separator */
+    padding: 0 8px; /* Add space around the separator */
+    color: #ccc;   /* Separator color */
+}
+
+.breadcrumb-item a {
+    color: #6ea9f0; /* Link color */
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+    color: gold;
+}
+
+/* Style for the current page (the one without a link) */
+.breadcrumb-item:last-child {
+    color: #fff; /* Make current page stand out slightly */
+    font-weight: bold;
+}
+
 header {
-    background: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
+    background: #352f44;
+    /* color: white; */
+    /* padding: 20px 0; */
+    text-align: right;
+    margin-left: 200px;
 }
 
 .banner h1 {
     margin: 0;
 }
 
+
 /* Container for Sidebar and Content */
 .container {
-    display: flex;
     min-height: 80vh;
-    padding: 20px;
+
+}
+/* Styling for the logo within the sidebar */
+.sidebar-logo {
+
+
+}
+
+.sidebar-logo img {
+    max-width: 105%;
+
 }
 
 /* Sidebar (Main Menu) */
 .sidebar {
+
     width: 200px;
     background-color: #333;
     color: white;
     padding: 20px;
-    flex-shrink: 0;
+
+    /* --- New Styles --- */
+    position: fixed;
+    left: 0;       /* Position it at the left edge */
+    top: 0;
+    height: 100vh;
+    /* --- Optional: Add scroll for long menus --- */
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
+
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar ul {
@@ -50,19 +112,50 @@ header {
 }
 
 .sidebar ul li a {
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    /* Text Color / Background Color */
     color: white;
+    background-color: #424040;
     text-decoration: none;
-    font-size: 18px;
+
+    border-radius: 8px;
+    transition: background-color 0.7s ease;
+
+}
+
+.sidebar ul li a ~ .active {
+    background-color: #007bff; /* Example active background color */
+    font-weight: bold;
 }
 
 .sidebar ul li a:hover {
     text-decoration: underline;
+    background-color: #2ef6a8;
+    color: #413f3f;
+    display: block;
 }
+
+.sidebar-user-info {
+    margin-top: auto;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    /* Text Color / Background Color */
+    color: white;
+    background-color: #424040;
+    text-decoration: none;
+
+    border-radius: 8px;
+    transition: background-color 0.7s ease;
+}
+
 
 /* Main Content */
 .content {
-    flex-grow: 1;
-    margin-left: 20px;
+    margin-left: 300px; /* Add new margin equal to sidebar width */
+
 }
 
 .content section {
@@ -80,11 +173,15 @@ header {
 
 /* Footer */
 footer {
-    background: #333;
+    background: #352f44;
     color: white;
     text-align: center;
     padding: 10px 0;
-    margin-top: 20px;
+    margin-top: 115px;
+    top: 0;
+    /* Added margin equal to sidebar width */
+    margin-left: 200px;
+
 }
 
 footer p {

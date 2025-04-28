@@ -2,13 +2,7 @@
 {% load static%}
 
 
-{% block sidenav %}
-  {% for item in item_list %}
-    <li>
-      <a href="{{item.link}}"> {{item.item}}</a>
-    </li>
-  {% endfor %}
-{%　endblock sidenav %}
+<!-- Remove every page dealing with the sidenav independently -->
 
 {% block content%}
   <h1>Post Books</h1>
