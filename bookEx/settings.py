@@ -66,6 +66,9 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
 
                 'bookMng.context_processors.navigation_items',
+                
+                #Time based greeting
+                'bookMng.context_processors.time_based_greeting',
             ],
         },
     },
@@ -109,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Los_Angeles"
 
 USE_I18N = True
 

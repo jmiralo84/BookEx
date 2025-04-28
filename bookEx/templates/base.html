@@ -65,7 +65,7 @@
             <div class="sidebar-user-info"> {# Add class, remove style attribute #}
                 {% if user.is_authenticated %}
 
-                Hello {{ user|lower|capfirst }}!
+                {{ greeting }}, {{ user|lower|capfirst }}!
                    <form action="{% url 'logout' %}?next=/" method="post">
 
                        <button type="submit" class="btn btn-primary">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
