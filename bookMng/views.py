@@ -63,7 +63,12 @@ def postbook(request):
                   })
 
 def displaybooks(request):
-    books = Book.objects.all()
+    query = request.GET.get('q', '') # Get the search query
+    if query:
+        books = Book.objects.filter(name__icontains=query)
+    else:
+        books = Book.objects.all()
+
     breadcrumb_list = [
         {'name': 'Home', 'url': reverse('index')},
         {'name': 'Display Books', 'url': None}
