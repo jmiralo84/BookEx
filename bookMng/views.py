@@ -189,3 +189,16 @@ def remove_from_cart(request, book_id):
             cart.remove(book_id)
             request.session["cart"] = cart
     return redirect("cart_page")
+
+def about_us(request):
+    breadcrumb_list = [
+        {'name': 'Home', 'url': reverse('index')},
+        {'name': 'About Us', 'url': None}
+    ]
+    return render(
+        request,
+      'bookMng/about_us.html',
+      {
+          # 'item_list': MainMenu.objects.all(),
+          'breadcrumb_list': breadcrumb_list,
+      })

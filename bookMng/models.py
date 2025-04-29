@@ -12,7 +12,7 @@ class MainMenu(models.Model):
 
     # New model for icons
     icon_class = models.CharField(
-        max_length=50,
+        max_length=100,
         blank=True,
         null=True
     )
@@ -33,6 +33,4 @@ class Book(models.Model):
     picture = models.FileField(upload_to='bookEx/static/uploads')
     pic_path = models.CharField(max_length=300, editable=False, blank=True)
     username = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-
-
 
