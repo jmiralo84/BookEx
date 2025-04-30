@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Purchase Complete!</h2>
+<p>You’ve successfully purchased the following book(s):</p>
+
+<ul>
+  {% for book in books %}
+    <li>{{ book.name }} - ${{ book.price }}</li>
+  {% endfor %}
+</ul>
+
+<a class="btn btn-primary" href="{% url 'mybooks' %}">Go to My Books</a>
+{% endblock %}
