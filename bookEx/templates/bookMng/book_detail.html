@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-
-
 {% block content %}
    <h1>Book Detail</h1>
    <table border="2" >
@@ -26,6 +23,9 @@
           <th>
               Book Web
           </th>
+          <th>
+              Rating
+          </th>
       </tr>
        <tr>
            <td>
@@ -46,6 +46,38 @@
            <td>
                {{ book.web }}
            </td>
+           <td>
+               {% if avg_rating %}
+                    <p><strong>Rating:</strong> ⭐ {{ avg_rating|floatformat:1 }}/10</p>
+                {% else %}
+                    <p><strong>Rating:</strong> Not yet rated</p>
+               {% endif %}
+           </td>
+
       </tr>
    </table>
+
+    <br>
+<h2>User Reviews</h2>
+
+{% if reviews %}
+  <ul>
+    {% for review in reviews %}
+      <li style="margin-bottom: 10px;">
+        {% if review.rating %}
+          <strong>⭐ {{ review.rating }}</strong>
+        {% endif %}
+        {% if review.comment %}
+          <em>"{{ review.comment }}"</em>
+        {% endif %}
+        {% if review.user %}
+          <br><span class="text-muted">– {{ review.user.username }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="text-muted">No reviews yet for this book.</p>
+{% endif %}
+
 {% endblock content %}
