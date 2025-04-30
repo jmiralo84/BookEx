@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>{{ book.name }}</h2>
+
+<!-- Top section: book info + cover -->
+<div class="row mb-4">
+  <!-- Left: Book info -->
+  <div class="col-md-8">
+    <p><strong>Author Website:</strong> <a href="{{ book.web }}">{{ book.web }}</a></p>
+    <p><strong>Price:</strong> ${{ book.price }}</p>
+    <p><strong>Publish Date:</strong> {{ book.publishdate }}</p>
+  </div>
+
+  <!-- Right: Book cover -->
+  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+    <img src="{% static book.pic_path %}" class="img-fluid rounded" style="max-height: 200px; max-width: 200px;" alt="Cover of {{ book.name }}">
+      <p><strong>Book Cover</strong></p>
+  </div>
+</div>
+
+<!-- Bottom section: review form -->
+<hr>
+<h4>Your Review</h4>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="comment">Comment:</label><br>
+        <textarea id="comment" name="comment" class="form-control" rows="3">{{ owned.comment }}</textarea>
+    </div>
+    <div class="form-group mt-2">
+        <label for="rating">Rating (1–10):</label>
+        <input id="rating" type="number" name="rating" step="0.1" min="1" max="10" value="{{ owned.rating|default_if_none:'' }}" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
+</form>
+{% endblock %}
