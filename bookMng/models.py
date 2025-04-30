@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -26,11 +25,15 @@ class Book(models.Model):
     web = models.URLField(max_length=300)
     price = models.DecimalField(decimal_places=2, max_digits=8)
     publishdate = models.DateField(auto_now=True)
-    rate = models.DecimalField(decimal_places=2, max_digits=4, validators=[
-        MinValueValidator(1.00),
-        MaxValueValidator(10.00)
-    ])
     picture = models.FileField(upload_to='bookEx/static/uploads')
     pic_path = models.CharField(max_length=300, editable=False, blank=True)
     username = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
+
+
+class OwnedBook(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    rating = models.DecimalField(decimal_places=1, max_digits=3, blank=True, null=True)
+    comment = models.TextField(blank=True)
+    purchase_date = models.DateTimeField(auto_now_add=True)
