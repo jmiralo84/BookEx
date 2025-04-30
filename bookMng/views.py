@@ -3,12 +3,14 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from decimal import Decimal
+from django.db.models import Avg
 
 
 from .models import MainMenu
 from .forms import BookForm
 
 from .models import Book
+from .models import OwnedBook
 
 from django.http import HttpResponseRedirect
 
@@ -63,41 +65,58 @@ def postbook(request):
                   })
 
 def displaybooks(request):
-    query = request.GET.get('q', '') # Get the search query
+    query = request.GET.get('q', '')  # Get the search query
     if query:
         books = Book.objects.filter(name__icontains=query)
     else:
         books = Book.objects.all()
 
+    # Add average rating to each book dynamically using OwnedBook
+    for b in books:
+        b.avg_rating = OwnedBook.objects.filter(book=b).aggregate(Avg('rating'))['rating__avg']
+
+        # Optional: fallback if no ratings exist
+        if b.avg_rating is None:
+            b.avg_rating = 0
+
+        b.pic_path = b.picture.url[14:]
+
     breadcrumb_list = [
         {'name': 'Home', 'url': reverse('index')},
         {'name': 'Display Books', 'url': None}
     ]
-    for b in books:
-        b.pic_path = b.picture.url[14:]
-    return render(request,
-                  'bookMng/displaybooks.html',
-                  {
-                      # 'item_list': MainMenu.objects.all(),
-                      'books': books,
-                      'breadcrumb_list': breadcrumb_list,
-                  })
 
+    return render(
+        request,
+        'bookMng/displaybooks.html',
+        {
+            'books': books,
+            'breadcrumb_list': breadcrumb_list,
+        }
+    )
 
 def book_detail(request, book_id):
     book = Book.objects.get(id=book_id)
+
     breadcrumb_list = [
         {'name': 'Home', 'url': reverse('index')},
-        {'name': 'Display Books', 'url': reverse('displaybooks')},  # Link back to list
-        {'name': book.name, 'url': None}  # Current book, use its name
+        {'name': 'Display Books', 'url': reverse('displaybooks')},
+        {'name': book.name, 'url': None}
     ]
+
     book.pic_path = book.picture.url[14:]
+    reviews = OwnedBook.objects.filter(book=book).exclude(rating=None).select_related("user")
+
+    # Calculate average rating
+    avg_rating = reviews.aggregate(Avg('rating'))['rating__avg']
+
     return render(request,
                   'bookMng/book_detail.html',
                   {
-                      # 'item_list': MainMenu.objects.all(),
                       'book': book,
                       'breadcrumb_list': breadcrumb_list,
+                      'reviews': reviews,
+                      'avg_rating': avg_rating,
                   })
 
 def book_delete(request, book_id):
@@ -108,6 +127,7 @@ def book_delete(request, book_id):
                   'bookMng/book_delete.html',
                   {
                       # 'item_list': MainMenu.objects.all(),
+
                   })
 
 class Register(CreateView):
@@ -125,19 +145,23 @@ def mybooks(request):
         {'name': 'Home', 'url': reverse('index')},
         {'name': 'My Books', 'url': None}
     ]
-    books = Book.objects.filter(username=request.user)
-    for b in books:
-        b.pic_path = b.picture.url[14:]
+
+    # Get all books the user has purchased
+    owned_books = OwnedBook.objects.filter(user=request.user).select_related("book")
+
+    # Add pic_path manually to each owned book's book instance
+    for b in owned_books:
+        b.book.pic_path = b.book.picture.url[14:]
+
     return render(request,
                   'bookMng/mybooks.html',
                   {
-                      # 'item_list': MainMenu.objects.all(),
-                      'books': books,
+                      'owned_books': owned_books,
                       'breadcrumb_list': breadcrumb_list,
                   })
 
 def add_to_cart(request, book_id):
-    if request.method != "POST":              
+    if request.method != "POST":
         return redirect("displaybooks")
 
     book = get_object_or_404(Book, pk=book_id)
@@ -202,8 +226,70 @@ def about_us(request):
     ]
     return render(
         request,
-      'bookMng/about_us.html',
+      "bookMng/about_us.html",
       {
           # 'item_list': MainMenu.objects.all(),
           'breadcrumb_list': breadcrumb_list,
       })
+
+def purchase_books(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    breadcrumb_list = [
+        {'name': 'Home', 'url': reverse('index')},
+        {'name': 'Cart', 'url': reverse('cart_page')},
+        {'name': 'Purchase Complete', 'url': None}
+    ]
+
+    cart_ids = request.session.get("cart", [])
+    books = Book.objects.filter(id__in=cart_ids)
+
+    for b in books:
+        # Avoid duplicate purchases
+        OwnedBook.objects.get_or_create(user=request.user, book=b)
+
+    # Clear the cart
+    request.session["cart"] = []
+
+    return render(
+        request,
+        "bookMng/purchase_success.html",
+        {
+            'books': books,
+            'breadcrumb_list': breadcrumb_list,
+        }
+    )
+
+def owned_book_detail(request, book_id):
+    owned = get_object_or_404(OwnedBook, user=request.user, book__id=book_id)
+    book = owned.book
+
+    breadcrumb_list = [
+        {'name': 'Home', 'url': reverse('index')},
+        {'name': 'My Books', 'url': reverse('mybooks')},
+        {'name': book.name, 'url': None}
+    ]
+
+    if request.method == "POST":
+        # Save rating and comment
+        owned.comment = request.POST.get("comment", "").strip()
+        try:
+            rating = Decimal(request.POST.get("rating"))
+            if 1 <= rating <= 10:
+                owned.rating = rating
+        except:
+            pass
+        owned.save()
+
+    book.pic_path = book.picture.url[14:]
+
+    return render(
+        request,
+        "bookMng/owned_book_detail.html",
+        {
+            'owned': owned,
+            'book': book,
+            'breadcrumb_list': breadcrumb_list,
+        }
+    )
