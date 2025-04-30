@@ -1,56 +1,46 @@
 {% extends "base.html" %}
 {% load static %}
 
-<!-- Remove every page dealing with the sidenav independently -->
-
 {% block content %}
-    <form method="get" action="{% url 'displaybooks' %}">
-        <input type="text" name="q" value="{{ query }}" placeholder="Search books..."/>
-        <button type="submit">Search</button>
-    </form>
+<form method="get" action="{% url 'displaybooks' %}">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search books..."/>
+    <button type="submit">Search</button>
+</form>
 
+<h1>Display Books</h1>
+<br>
+<table border="2">
+    <tr>
+        <th>Book Name</th>
+        <th>Book Price</th>
+        <th>User Name</th>
+        <th>Rating</th>
+        <th></th>
+    </tr>
 
-    <h1>Display Books</h1>
-    <br>
-    <table border="2">
-        <tr>
-            <th>
-                Book Name
-            </th>
-            <th>
-                Book Price
-            </th>
-            <th>
-                User Name
-            </th>
-            <th>
-                Rating
-            </th>
-            <th>
-
-            </th>
-        </tr>
-        {% for book in books %}
-        <tr>
-            <td>
-                <a href="{% url 'book_detail' book.id %}"> {{ book.name }} </a>
-            </td>
-            <td>
-                {{ book.price }}
-            </td>
-            <td>
-                {{ book.username }}
-            </td>
-            <td>
-                {{ book.rate}}
-            </td>
-            <td>
-                <form action="{% url 'add_to_cart' book.id %}" method="post" style="margin:0">
-                    {% csrf_token %}
-                    <button type="submit">Add to cart</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% for book in books %}
+    <tr>
+        <td><a href="{% url 'book_detail' book.id %}">{{ book.name }}</a></td>
+        <td>
+            {{ book.price }}
+        </td>
+        <td>
+            {{ book.username }}
+        </td>
+        <td>
+            {% if book.avg_rating %}
+                ⭐ {{ book.avg_rating|floatformat:1 }}
+            {% else %}
+                <span class="text-muted">N/A</span>
+            {% endif %}
+        </td>
+        <td>
+            <form action="{% url 'add_to_cart' book.id %}" method="post" style="margin:0">
+                {% csrf_token %}
+                <button type="submit">Add to cart</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock content %}
