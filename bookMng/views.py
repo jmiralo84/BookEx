@@ -281,15 +281,16 @@ def owned_book_detail(request, book_id):
         except:
             pass
         owned.save()
+        return redirect("mybooks")
+    else:
+        book.pic_path = book.picture.url[14:]
 
-    book.pic_path = book.picture.url[14:]
-
-    return render(
-        request,
-        "bookMng/owned_book_detail.html",
-        {
-            'owned': owned,
-            'book': book,
-            'breadcrumb_list': breadcrumb_list,
-        }
+        return render(
+            request,
+            "bookMng/owned_book_detail.html",
+            {
+                'owned': owned,
+                'book': book,
+                'breadcrumb_list': breadcrumb_list,
+            }
     )

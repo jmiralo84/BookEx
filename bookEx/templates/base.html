@@ -52,9 +52,17 @@
 
                 <!-- this is brought over from the other.htmls -->
                    {% for item in item_list %}
-                      <li>
-                        <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
-                      </li>
+                    {% if user.is_authenticated and item.link == "/mybooks" %}
+                        <li>
+                            <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
+                        </li>
+                    {% elif not user.is_authenticated and item.link == "/mybooks" %}
+                    {% else %}
+                        <li>
+                            <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
+                        </li>
+                    {% endif %}
+
                    {% endfor %}
                 {% endblock sidenav %}
             </ul>
