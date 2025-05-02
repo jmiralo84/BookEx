@@ -23,14 +23,21 @@ from django.urls import reverse
 
 def index(request):
     breadcrumb_list = [
-        {'name': 'Home', 'url': None}  # Home is the current page
+        {'name': 'Home', 'url': None}
     ]
+
+    top_books = Book.objects.annotate(avg_rating=Avg('ownedbook__rating')) \
+                            .filter(avg_rating__isnull=False) \
+                            .order_by('-avg_rating')[:5]
+
+    for book in top_books:
+        book.pic_path = book.picture.url[14:]
 
     return render(request,
                   'bookMng/index.html',
                   {
-                      # 'item_list': MainMenu.objects.all()
                       'breadcrumb_list': breadcrumb_list,
+                      'top_books': top_books
                   })
 
 
