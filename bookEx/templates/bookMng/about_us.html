@@ -1,11 +1,27 @@
 {% extends "base.html" %}
-{% load static%}
+{% load static %}
 
+{% block content %}
+<div class="text-centered">
+    <h1 class="mb-4"> About Us</h1>
 
-<!-- Remove every page dealing with the sidenav independently -->
+    <p class="lead">Welcome to BookEx. A digital space built for readers by readers.</p>
 
-{% block content%}
-  <h1>About Us</h1>
-    <p>Welcome to our book exchange platform! We are dedicated to creating a community where book lovers can connect,
-        share, and exchange their favorite reads.</p>
-{% endblock content%}
+    <hr class="my-4">
+
+    <h3>🌟 Our Mission</h3>
+    <p>We aim to make reading more accessible by allowing users to post, browse, and review books. Whether you're looking to share a hidden gem or discover your next favorite title, BookEx makes it easy to connect with fellow readers.</p>
+
+    <h3>🎯 Our Goals</h3>
+    <ul>
+        <li>Encourage sustainable reading through sharing.</li>
+        <li>Build a trusted platform for exchanging quality books.</li>
+        <li>Foster an inclusive space for feedback and discussion.</li>
+    </ul>
+
+    <h3>🤝 Community</h3>
+    <p>BookEx thrives on user contributions; every book posted, review submitted, and rating shared helps someone else find their next great read. We welcome all book lovers to grow our community through kindness, curiosity, and a shared love of reading.</p>
+
+    <p class="mt-4 text-muted"><em>Thank you for being a part of our journey.</em></p>
+</div>
+{% endblock content %}
