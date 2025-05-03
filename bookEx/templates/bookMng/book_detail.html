@@ -2,82 +2,51 @@
 {% load static %}
 
 {% block content %}
-   <h1>Book Detail</h1>
-   <table border="2" >
-      <tr>
-          <th>
-              Book Picture
-          </th>
-          <th>
-              Book Name
-          </th>
-          <th>
-              Book Price
-          </th>
-          <th>
-              User Name
-          </th>
-          <th>
-              Book Post Date
-          </th>
-          <th>
-              Book Web
-          </th>
-          <th>
-              Rating
-          </th>
-      </tr>
-       <tr>
-           <td>
-           <img src="{% static book.pic_path %}" width="100" />
-         </td>
-         <td>
-            {{ book.name }}
-         </td>
-         <td>
-            {{ book.price }}
-         </td>
-          <td>
-            {{ book.username }}
-         </td>
-           <td>
-            {{ book.publishdate }}
-         </td>
-           <td>
-               {{ book.web }}
-           </td>
-           <td>
-               {% if avg_rating %}
-                    <p><strong>Rating:</strong> ⭐ {{ avg_rating|floatformat:1 }}/10</p>
-                {% else %}
-                    <p><strong>Rating:</strong> Not yet rated</p>
-               {% endif %}
-           </td>
+<div class="text-center">
+  <h2><strong>{{ book.name }}</strong></h2>
 
-      </tr>
-   </table>
+  <div class="row mb-4">
 
-    <br>
-<h2>User Reviews</h2>
-
-{% if reviews %}
-  <ul>
-    {% for review in reviews %}
-      <li style="margin-bottom: 10px;">
-        {% if review.rating %}
-          <strong>⭐ {{ review.rating }}</strong>
+    <div class="col-md-8 text-start">
+      <p><strong>Author Website:</strong> <a href="{{ book.web }}">{{ book.web }}</a></p>
+      <p><strong>Price:</strong> ${{ book.price }}</p>
+      <p><strong>Publish Date:</strong> {{ book.publishdate }}</p>
+      <p><strong>Posted by:</strong> {{ book.username|default:"Anonymous" }}</p>
+      <p>
+        <strong>Rating:</strong>
+        {% if avg_rating %}
+          <span class="text-warning">⭐ {{ avg_rating|floatformat:1 }}/10</span>
+        {% else %}
+          <span class="text-muted">Not yet rated</span>
         {% endif %}
-        {% if review.comment %}
-          <em>"{{ review.comment }}"</em>
-        {% endif %}
-        {% if review.user %}
-          <br><span class="text-muted">– {{ review.user.username }}</span>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p class="text-muted">No reviews yet for this book.</p>
-{% endif %}
+      </p>
+    </div>
 
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+      <img src="{% static book.pic_path %}" class="img-fluid rounded" style="max-height: 200px; max-width: 200px;" alt="Cover of {{ book.name }}">
+      <p><strong>Book Cover</strong></p>
+    </div>
+  </div>
+
+  <h2 class="mb-3">User Reviews</h2>
+  {% if reviews %}
+    <ul class="list-unstyled">
+      {% for review in reviews %}
+        <li class="mb-3 border-bottom pb-2">
+          {% if review.rating %}
+            <strong>⭐ {{ review.rating }}</strong>
+          {% endif %}
+          {% if review.comment %}
+            <em>"{{ review.comment }}"</em>
+          {% endif %}
+          {% if review.user %}
+            <br><span class="text-muted">– {{ review.user.username }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">No reviews yet for this book.</p>
+  {% endif %}
+</div>
 {% endblock content %}
