@@ -2,39 +2,45 @@
 {% load static %}
 
 {% block content %}
-   <h1>My Books</h1>
-   <table border="2">
-      <tr>
-          <th>Book Name</th>
-          <th>Book Price</th>
-          <th>Purchase Date</th>
-          <th>Your Rating</th>
-          <th>Actions</th>
-      </tr>
-   {% for owned in owned_books %}
-       <tr>
-         <td>
-           <a href="{% url 'owned_book_detail' owned.book.id %}">{{ owned.book.name }}</a>
-         </td>
-         <td>
-           ${{ owned.book.price }}
-         </td>
-         <td>
-           {{ owned.purchase_date|date:"M d, Y" }}
-         </td>
-         <td>
-           {% if owned.rating %}
-             {{ owned.rating }}
-             {% else %}
-             <i>Not rated</i>
-             {% endif %}
-         </td>
-         <td>
-           <a class="btn btn-sm btn-outline-info" href="{% url 'owned_book_detail' owned.book.id %}">View Details</a>
-         </td>
-      </tr>
-   {% empty %}
-      <tr><td colspan="5">You haven't purchased any books yet.</td></tr>
-   {% endfor %}
-   </table>
+<div class="text-center">
+    <h1 class="mb-4">📚 My Books</h1>
+
+    {% if owned_books %}
+    <div class="row justify-content-center">
+        {% for owned in owned_books %}
+        <div class="col-md-3 mb-4">
+            
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-img-container" style="position: relative; width: 100%; padding-top: 100%; overflow: hidden;">
+                    <img src="{% static owned.book.pic_path %}" alt="{{ owned.book.name }}"
+                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" />
+                </div>
+
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-2">
+                        <a href="{% url 'owned_book_detail' owned.book.id %}" class="text-decoration-none">{{ owned.book.name }}</a>
+                    </h5>
+                    <p class="card-text mb-1"><strong>Price:</strong> ${{ owned.book.price }}</p>
+                    <p class="card-text mb-1"><strong>Purchased:</strong> {{ owned.purchase_date|date:"M d, Y" }}</p>
+                    <p class="card-text mb-2">
+                        <strong>Your Rating:</strong>
+                        {% if owned.rating %}
+                            <span class="text-warning">⭐ {{ owned.rating }}/10</span>
+                        {% else %}
+                            <i class="text-muted">Not rated</i>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="card-footer bg-white border-0 text-center">
+                    <a href="{% url 'owned_book_detail' owned.book.id %}" class="btn btn-sm btn-outline-info">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="text-muted">You haven't purchased any books yet.</p>
+    {% endif %}
+</div>
 {% endblock content %}
