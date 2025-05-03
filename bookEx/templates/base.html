@@ -54,18 +54,18 @@
 
                 <!-- this is brought over from the other.htmls -->
                    {% for item in item_list %}
-                    {% if user.is_authenticated and item.link == "/mybooks" %}
-                        <li>
-                            <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
-                        </li>
-                    {% elif not user.is_authenticated and item.link == "/mybooks" %}
-                    {% else %}
-                        <li>
-                            <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
-                        </li>
-                    {% endif %}
-
-                   {% endfor %}
+                        {% if item.link == "/mybooks" or item.link == "/cart" %}
+                            {% if user.is_authenticated %}
+                                <li>
+                                    <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li>
+                                <a href="{{ item.link }}"> <i class="{{ item.icon_class }}"></i> {{ item.item }} </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 {% endblock sidenav %}
             </ul>
 
@@ -84,7 +84,6 @@
                    <a class="btn btn-primary" href="{% url 'login' %}?next=/" role="button">Login <i class="fa-solid fa-user"></i></a>
                 {% endif %}
             </div>
-            <!-- END OF PASTED BLOCK -->
 
         </nav>
 
