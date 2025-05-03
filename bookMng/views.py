@@ -206,18 +206,21 @@ def cart_page(request):
     cart_ids = request.session.get("cart", [])
     books = Book.objects.filter(id__in=cart_ids)
 
+    for b in books:
+        b.pic_path = b.picture.url[14:]
+
     subtotal = sum(b.price for b in books) if books else Decimal("0.00")
 
     return render(
         request,
         "bookMng/cart.html",
         {
-            # "item_list": MainMenu.objects.all(),
             "books": books,
             "subtotal": subtotal,
-            'breadcrumb_list': breadcrumb_list,
+            "breadcrumb_list": breadcrumb_list,
         },
     )
+
 def remove_from_cart(request, book_id):
     if request.method == "POST":
         cart = request.session.get("cart", [])
@@ -259,14 +262,18 @@ def purchase_books(request):
     # Clear the cart
     request.session["cart"] = []
 
+    subtotal = sum(b.price for b in books) if books else Decimal("0.00")
+
     return render(
         request,
         "bookMng/purchase_success.html",
         {
             'books': books,
+            'subtotal': subtotal,
             'breadcrumb_list': breadcrumb_list,
         }
     )
+
 
 def owned_book_detail(request, book_id):
     owned = get_object_or_404(OwnedBook, user=request.user, book__id=book_id)
