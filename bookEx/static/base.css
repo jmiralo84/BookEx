@@ -44,7 +44,7 @@ body {
 
 .breadcrumb-item a:hover {
     text-decoration: underline;
-    color: gold;
+    color: purple;
 }
 
 /* Style for the current page (the one without a link) */
@@ -133,7 +133,7 @@ header {
 .sidebar ul li a:hover {
     text-decoration: underline;
     background-color: #2ef6a8;
-    color: #413f3f;
+    color: #800080;
     display: block;
 }
 
@@ -171,6 +171,10 @@ header {
     line-height: 1.6;
 }
 
+p {
+ style: "font-family:'Brush Script MT', cursive;"
+}
+
 /* Footer */
 footer {
     background: #352f44;
@@ -186,4 +190,30 @@ footer {
 
 footer p {
     font-size: 14px;
+}
+
+/* forms */
+input[type=text] {
+  border: 2px solid purple;
+  border-radius: 7px;
+}
+
+input[type=url] {
+  border: 2px solid purple;
+  border-radius: 7px;
+}
+
+input[type=number] {
+  border: 2px solid purple;
+  border-radius: 7px;
+}
+
+button[type=submit]{
+    background-color: purple;
+     color: white;
+}
+
+a[role=button]{
+    background-color: purple;
+
 }
