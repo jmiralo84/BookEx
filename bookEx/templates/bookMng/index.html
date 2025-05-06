@@ -39,31 +39,44 @@
    <h4 class="mb-4" style="font-family:'Brush Script MT', cursive;" ><strong>🔥 Hot Picks</strong></h4>
    <p class="mb-4" style="font-family:'Brush Script MT', cursive;">Want a good place to start? Here are the highest rated books by other users!</p>
 
-{% if top_books %}
-  <div class="row justify-content-center">
-    {% for book in top_books %}
-      <div class="col-md-3 mb-4">
-        <div class="card h-100 shadow-sm border-0">
-          <div class="card-img-container" style="position: relative; width: 100%; padding-top: 100%; overflow: hidden;">
-            <img src="{% static book.pic_path %}" alt="{{ book.name }}"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" />
-          </div>
-
-          <div class="card-body text-center">
-            <h5 class="card-title mb-2">{{ book.name }}</h5>
-            <p class="card-text mb-1">
-              {% if book.avg_rating %}
-                <span class="text-warning">⭐ {{ book.avg_rating|floatformat:1 }}/10</span>
-              {% else %}
-                <span class="text-muted">Not rated</span>
-              {% endif %}
-            </p>
-            <a href="{% url 'book_detail' book.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
-          </div>
+ {% if top_books %}
+    <div id="hotPicksCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for book in top_books %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-img-container" style="position: relative; width: 100%; padding-top: 100%; overflow: hidden;">
+                                <img src="{% static book.pic_path %}" alt="{{ book.name }}"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" />
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title mb-2">{{ book.name }}</h5>
+                                <p class="card-text mb-1">
+                                    {% if book.avg_rating %}
+                                        <span class="text-warning">⭐ {{ book.avg_rating|floatformat:1 }}/10</span>
+                                    {% else %}
+                                        <span class="text-muted">Not rated</span>
+                                    {% endif %}
+                                </p>
+                                <a href="{% url 'book_detail' book.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-  </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#hotPicksCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hotPicksCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 {% else %}
   <p class="text-muted">No rated books yet. Be the first to leave a review!</p>
 {% endif %}

@@ -232,3 +232,13 @@ a[role=button]{
     height: 100%;
     border-radius: 5px;
 }
+
+.carousel-control-next-icon{
+    background-color: purple;
+    border-radius: 50%;
+}
+
+.carousel-control-prev-icon{
+    background-color: purple;
+    border-radius: 50%;
+}
