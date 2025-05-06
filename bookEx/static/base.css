@@ -208,6 +208,16 @@ input[type=number] {
   border-radius: 7px;
 }
 
+input[type=password] {
+  border: 2px solid purple;
+  border-radius: 7px;
+}
+
+textarea[id=comment]{
+border: 2px solid purple;
+  border-radius: 7px;
+}
+
 button[type=submit]{
     background-color: purple;
      color: white;
