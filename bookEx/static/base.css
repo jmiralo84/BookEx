@@ -221,8 +221,8 @@ a[role=button]{
 .card{
     background-color: #f9f9f9;
     border: 1px solid white;
-    margin-bottom: 1px;
-    padding: 15px;
+    margin-bottom: 5px;
+    padding: 10px;
     border-radius: 5px;
 
 }

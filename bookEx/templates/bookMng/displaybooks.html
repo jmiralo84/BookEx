@@ -6,10 +6,10 @@
     <h1 class="mb-4" style="font-family:'Brush Script MT', cursive;">📚 Explore Books</h1>
 
     <form method="get" action="{% url 'displaybooks' %}" class="mb-5 d-flex justify-content-center">
-        <input type="text" name="q" value="{{ query }}" class="form-control w-50 me-2" placeholder="Search books...">
+        <input type="text" name="q" value="{{ query }}" class="form-control me-2" placeholder="Search books...">
         <button type="submit" class="btn btn-outline-primary">Search</button>
     </form>
-
+    <br>
     <div class="row justify-content-center">
         {% for book in books %}
         <div class="col-md-3 mb-4">
