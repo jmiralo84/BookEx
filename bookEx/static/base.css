@@ -208,6 +208,18 @@ input[type=number] {
   border-radius: 7px;
 }
 
+input[type=password] {
+  border: 2px solid purple;
+  border-radius: 7px;
+}
+
+input[type=submit]{
+  background-color: #800080;
+  color: white;
+  border-radius: 7px;
+  padding: 5px 20px;
+}
+
 button[type=submit]{
     background-color: purple;
      color: white;
