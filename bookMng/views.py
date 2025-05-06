@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from decimal import Decimal
+from django.core.paginator import Paginator
 from django.db.models import Avg
 
 
@@ -93,12 +94,17 @@ def displaybooks(request):
         {'name': 'Display Books', 'url': None}
     ]
 
+    paginator = Paginator(books, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(
         request,
         'bookMng/displaybooks.html',
         {
-            'books': books,
+            'page_obj': page_obj,
             'breadcrumb_list': breadcrumb_list,
+            'query': query,
         }
     )
 
