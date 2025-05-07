@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="text-center">
-    <h1 class="mb-3" style="font-family:'Brush Script MT', cursive;">📚 Welcome to BookEx!</h1>
+    <h1 class="mb-3" style="font-family: Helvetica, Arial, sans-serif">📚 Welcome to BookEx!</h1>
 
-    <p class="lead" style="font-family:'Brush Script MT', cursive;" >Post, discover, and review books with fellow readers.</p>
+    <p class="lead" style="font-family:Helvetica, Arial, sans-serif" >Post, discover, and review books with fellow readers.</p>
 
     <div class="row justify-content-center mt-4">
 
@@ -14,8 +14,8 @@
         <div class="col-md-4">
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-family:'Brush Script MT', cursive;">🔍 Browse Books</h5>
-                    <p class="card-text" style="font-family:'Brush Script MT', cursive;">Explore the full collection of books shared by the community.</p>
+                    <h5 class="card-title" style="font-family:Helvetica, Arial, sans-serif">🔍 Browse Books</h5>
+                    <p class="card-text" style="font-family:Helvetica, Arial, sans-serif">Explore the full collection of books shared by the community.</p>
                     <a href="{% url 'displaybooks' %}" class="btn btn-outline-primary">See All Books</a>
                 </div>
             </div>
@@ -26,8 +26,8 @@
         <div class="col-md-4">
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-family:'Brush Script MT', cursive;" >📝 Post Your Book</h5>
-                    <p class="card-text" style="font-family:'Brush Script MT', cursive;" >Have a great book to share? Post it and let others enjoy it!</p>
+                    <h5 class="card-title" style="font-family:Helvetica, Arial, sans-serif" >📝 Post Your Book</h5>
+                    <p class="card-text" style="font-family:Helvetica, Arial, sans-serif" >Have a great book to share? Post it and let others enjoy it!</p>
                     <a href="{% url 'postbook' %}" class="btn btn-outline-success">Post a Book</a>
                 </div>
             </div>
@@ -36,8 +36,8 @@
     </div>
 
    <hr class="my-5">
-   <h4 class="mb-4" style="font-family:'Brush Script MT', cursive;" ><strong>🔥 Hot Picks</strong></h4>
-   <p class="mb-4" style="font-family:'Brush Script MT', cursive;">Want a good place to start? Here are the highest rated books by other users!</p>
+   <h4 class="mb-4" style="font-family:Helvetica, Arial, sans-serif" ><strong>🔥 Hot Picks</strong></h4>
+   <p class="mb-4" style="font-family:Helvetica, Arial, sans-serif">Want a good place to start? Here are the highest rated books by other users!</p>
 
  {% if top_books %}
     <div id="hotPicksCarousel" class="carousel slide" data-bs-ride="carousel">

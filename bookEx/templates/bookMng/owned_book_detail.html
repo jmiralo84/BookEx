@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h2 style="font-family:'Brush Script MT', cursive;">{{ book.name }}</h2>
+<h2 style="font-family:Helvetica, Arial, sans-serif">{{ book.name }}</h2>
 
 <!-- Top section: book info + cover -->
 <div class="row mb-4">
@@ -22,7 +22,7 @@
 
 <!-- Bottom section: review form -->
 <hr>
-<h4 style="font-family:'Brush Script MT', cursive;">Your Review</h4>
+<h4 style="font-family:Helvetica, Arial, sans-serif">Your Review</h4>
 <form method="post">
     {% csrf_token %}
     <div class="form-group">

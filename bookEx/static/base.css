@@ -176,7 +176,7 @@ header {
 }
 
 p {
- style: "font-family:'Brush Script MT', cursive;"
+ style: "font-family:Helvetica, Arial, sans-serif"
 }
 
 /* Footer */
@@ -270,4 +270,9 @@ div[class=col-md-8]{
  background-color: white;
  border-radius: 7px;
 
+}
+
+/* Apply to all elements */
+{
+    font-family: 'Arial', sans-serif !important;
 }
